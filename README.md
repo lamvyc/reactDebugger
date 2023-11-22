@@ -1,70 +1,77 @@
-# Getting Started with Create React App
+## git 
+git update-index --assume-unchanged .gitignore    让 Git 完全忽略 .gitignore 文件的更改（只对本地有效）
+git update-index --no-assume-unchanged .gitignore   恢复上述操作
+git branch --set-upstream-to=origin/sandbox sandbox
+git push origin HEAD:refs/for/master                      
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## mac
+sudo chmod -R 777 p0_xiangshe    -----  「p0_xiangshe是自己指定的文件夹」释放文件编辑权限（mac系统专有）
 
-## Available Scripts
+## npm
+-g    全局安装
+--save    表示将模块添加到 package.json 文件中的 dependencies 属性。
+-D. 只在本地开发安装依赖，打包的时候不进去   ====   npm install eslint --save-dev
 
-In the project directory, you can run:
+## vscode
+在 VS Code 中进行文件搜索时，使用 > 符号可以进行高级搜索。
+//比如:搜索setting.json文件  =>  >users
 
-### `yarn start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## vim编辑器
+ 保存并退出 => :wq
+ 退出vim => :q
+ 撤销操作 => u 或 Ctrl + r
+ 
+//插入模式：
+i：在当前光标处插入
+a：在当前光标后插入
+o：在当前行下方插入一个新行并进入插入模式
+O：在当前行上方插入一个新行并进入插入模式
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+//复制、粘贴：
+yy：复制当前行
+p：粘贴
 
-### `yarn test`
+重复操作：.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+------------------------------------------------------------------------------------
+## webpack
 
-### `yarn build`
+### contenthash 与 hash区别
+**hash 是基于整个构建过程生成的唯一哈希值，而 contenthash 是基于文件内容生成的哈希值。**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+contenthash: 当文件内容发生变化时，contenthash 会生成一个新的唯一哈希值。
+使用 contenthash 作为文件名的一部分时，可以实现在文件内容变化时进行缓存失效，而对于未更改的文件，仍然可以从缓存中加载。
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+hash: 只要构建过程中有任何变化，无论是源代码的修改、配置的更改还是构建工具的更新，都会导致生成的哈希值发生变化。
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### infrastructureLogging
+日志记录
 
-### `yarn eject`
+### cache
+缓存
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### babel-runtime是做什么的
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### creat-react-app默认支持sass不支持less
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+### IgnorePlugin
+`javascript`
+ new webpack.IgnorePlugin({
+    resourceRegExp: /^\.\/locale$/,
+    contextRegExp: /moment$/,
+ }),
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 性能优化的点
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- cache.type
+string:'memory'|'filesystem'
+内存肯定比文件系统快
 
-### Code Splitting
+- module.rules.oneOf
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- babel-preset-react-app/webpack-overrides
+- 解决babel缓存bug
+- https://github.com/babel/babel/issues/8497
